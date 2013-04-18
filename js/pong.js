@@ -3,12 +3,23 @@ var stage = new Kinetic.Stage({
   width: 600,
   height: 400
 });
-var p1score = 0;
-var p2score = 0;
+
+var p1score = 0; //player 1 score
+var p2score = 0; //player 2 score
+var dx = -1; // direction of ball's next move
+var dy = 1; // direction of ball's next move
 var layer = new Kinetic.Layer();
 
 var background1 = new Kinetic.Rect({
   x:0,
+  y:0,
+  width: 300,
+  height: 400,
+  fill: 'white'
+});
+
+var background2 = new Kinetic.Rect({
+  x:300,
   y:0,
   width: 300,
   height: 400,
@@ -39,14 +50,6 @@ var score2 = new Kinetic.Label({
   width: 50
 });
 
-var background2 = new Kinetic.Rect({
-  x:300,
-  y:0,
-  width: 300,
-  height: 400,
-  fill: 'white'
-});
-
 var centerLine = new Kinetic.Line({
   points: [300, 0, 300, 400],
   stroke: 'black'
@@ -67,9 +70,6 @@ var player2 = new Kinetic.Rect({
   height: 50,
   fill: 'black'
 });
-
-var dx = -1;
-var dy = 1;
 
 var ball = new Kinetic.Circle({
   x: 300,
@@ -94,7 +94,16 @@ background2.on('mousemove', function() {
   layer.draw();
 });
 
-function update(ball) {
+function resetBall() {
+  dx = 0;
+  dy = 0;
+  ball.setX(300);
+  ball.setY(200);
+  dx = -1;
+  dy = 1;
+}
+
+function tick() {
   var x = ball.getX();
   var y = ball.getY();
   var x2 = x + dx;
@@ -144,27 +153,16 @@ function update(ball) {
   ball.move(dx, dy);
 }
 
-layer.add(background1).add(background2).add(centerLine).add(player1).add(player2).add(score1).add(score2).add(ball);
-
-stage.add(layer);
-
-var ballUpdater;
-
 function updateBall() {
-  ballUpdater = setTimeout(function(){
-    update(ball);
+  setTimeout(function(){
+    tick();
     layer.draw();
     updateBall();
   }, 10);
 }
 
-function resetBall() {
-  dx = 0;
-  dy = 0;
-  ball.setX(300);
-  ball.setY(200);
-  dx = -1;
-  dy = 1;
-}
+layer.add(background1).add(background2).add(centerLine).add(player1).add(player2).add(score1).add(score2).add(ball);
+
+stage.add(layer);
 
 updateBall();
