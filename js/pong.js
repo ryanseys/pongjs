@@ -19,16 +19,14 @@ var background1 = new Kinetic.Rect({
   x: 0,
   y: 0,
   width: half_w,
-  height: h,
-  fill: 'white'
+  height: h
 });
 
 var background2 = new Kinetic.Rect({
   x: half_w,
   y: 0,
   width: half_w,
-  height: h,
-  fill: 'white'
+  height: h
 });
 
 var score1 = new Kinetic.Label({
@@ -73,7 +71,7 @@ var player1 = new Kinetic.Rect({
 });
 
 var player2 = new Kinetic.Rect({
-  x: 580,
+  x: 590,
   y: half_h,
   width: 10,
   height: 50,
@@ -138,7 +136,7 @@ function tick() {
       dx = dx * -1.1;
     }
   }
-  else if(x2 > (w - 25) && x2 < (w - 20)) {
+  else if(x2 < (w - 10) && x2 > (w - 15)) {
     var p2y = player2.getY();
     if(y2 > p2y - 25 && y2 < p2y + 25) {
       dx = dx * -1.1;
