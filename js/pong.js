@@ -6,8 +6,8 @@ var stage = new Kinetic.Stage({
 
 var p1score = 0; //player 1 score
 var p2score = 0; //player 2 score
-var dx = Math.random() * 1.5; // direction of ball's next move
-var dy = Math.random() * 1.5; // direction of ball's next move
+var dx = (Math.random() + 0.7) * (Math.random() > 0.5 ? -1 : 1); // direction of ball's next move
+var dy = (Math.random() + 0.5) * (Math.random() > 0.5 ? -1 : 1); // direction of ball's next move
 var layer = new Kinetic.Layer();
 
 var background1 = new Kinetic.Rect({
@@ -99,8 +99,8 @@ function resetBall() {
   dy = 0;
   ball.setX(300);
   ball.setY(200);
-  dx = -1;
-  dy = 1;
+  dx = (Math.random() + 0.7) * (Math.random() > 0.5 ? -1 : 1); // direction of ball's next move
+  dy = (Math.random() + 0.5) * (Math.random() > 0.5 ? -1 : 1); // direction of ball's next move
 }
 
 function tick() {
