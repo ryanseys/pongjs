@@ -130,16 +130,16 @@ function tick() {
     score1.getText().setText(p1score.toString());
     resetBall();
   }
-  else if(x2 + offsetx == 15 + 5) {
+  else if(x2 + offsetx < 20 && x2 + offsetx > 15) {
     var p1y = player1.getY();
     if(y2 < p1y + 60 && y2 > p1y) {
-      dx = -dx;
+      dx = dx * -1.1;
     }
   }
   else if(x2 + offsetx > 580 && x2 + offsetx < 585) {
     var p2y = player2.getY();
     if(y2 < p2y + 60 && y2 > p2y) {
-      dx = -dx;
+      dx = dx * -1.1;
     }
   }
 
@@ -156,8 +156,8 @@ function tick() {
 function updateBall() {
   setTimeout(function(){
     tick();
-    layer.draw();
     updateBall();
+    layer.draw();
   }, 10);
 }
 
