@@ -6,8 +6,8 @@ var stage = new Kinetic.Stage({
 
 var p1score = 0; //player 1 score
 var p2score = 0; //player 2 score
-var dx = -1; // direction of ball's next move
-var dy = 1; // direction of ball's next move
+var dx = Math.random() * 1.5; // direction of ball's next move
+var dy = Math.random() * 1.5; // direction of ball's next move
 var layer = new Kinetic.Layer();
 
 var background1 = new Kinetic.Rect({
@@ -131,13 +131,13 @@ function tick() {
     resetBall();
   }
   else if(x2 + offsetx == 15 + 5) {
-    var p1y = player1.getY()
+    var p1y = player1.getY();
     if(y2 < p1y + 60 && y2 > p1y) {
       dx = -dx;
     }
   }
-  else if(x2 + offsetx == 580) {
-    var p2y = player2.getY()
+  else if(x2 + offsetx > 580 && x2 + offsetx < 585) {
+    var p2y = player2.getY();
     if(y2 < p2y + 60 && y2 > p2y) {
       dx = -dx;
     }
