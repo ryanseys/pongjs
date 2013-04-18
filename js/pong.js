@@ -1,0 +1,170 @@
+var stage = new Kinetic.Stage({
+  container: 'container',
+  width: 600,
+  height: 400
+});
+var p1score = 0;
+var p2score = 0;
+var layer = new Kinetic.Layer();
+
+var background1 = new Kinetic.Rect({
+  x:0,
+  y:0,
+  width: 300,
+  height: 400,
+  fill: 'white'
+});
+
+var score1 = new Kinetic.Label({
+  text: {
+    text: p1score.toString(),
+    fill: 'black',
+    fontSize: 30
+  },
+  x: 130,
+  y: 10,
+  height: 50,
+  width: 50
+});
+
+var score2 = new Kinetic.Label({
+  text: {
+    text: p2score.toString(),
+    fill: 'black',
+    fontSize: 30
+  },
+  x: 450,
+  y: 10,
+  height: 50,
+  width: 50
+});
+
+var background2 = new Kinetic.Rect({
+  x:300,
+  y:0,
+  width: 300,
+  height: 400,
+  fill: 'white'
+});
+
+var centerLine = new Kinetic.Line({
+  points: [300, 0, 300, 400],
+  stroke: 'black'
+});
+
+var player1 = new Kinetic.Rect({
+  x: 10,
+  y: 190,
+  width: 10,
+  height: 50,
+  fill: 'black'
+});
+
+var player2 = new Kinetic.Rect({
+  x: 580,
+  y: 190,
+  width: 10,
+  height: 50,
+  fill: 'black'
+});
+
+var dx = -1;
+var dy = 1;
+
+var ball = new Kinetic.Circle({
+  x: 300,
+  y: 200,
+  radius: 10,
+  fill: 'black'
+});
+
+background1.on('mousemove', function() {
+  var mousePos = stage.getMousePosition();
+  var x = mousePos.x;
+  var y = mousePos.y;
+  player1.setY(y);
+  layer.draw();
+});
+
+background2.on('mousemove', function() {
+  var mousePos = stage.getMousePosition();
+  var x = mousePos.x;
+  var y = mousePos.y;
+  player2.setY(y);
+  layer.draw();
+});
+
+function update(ball) {
+  var x = ball.getX();
+  var y = ball.getY();
+  var x2 = x + dx;
+  var y2 = y + dy;
+  var offsetx = 0;
+  var offsety = 0;
+
+  //offset for ball edge collision
+  //TODO: make -5 / +5 equal to radius / 2
+  if(dx > 0) offsetx = 5;
+  else offsetx = -5;
+  if(dy > 0) offsety = 5;
+  else offsety = -5;
+
+  if(x2 + offsetx < 0) {
+    dx = -dx;
+    p2score++;
+    score2.getText().setText(p2score.toString());
+    resetBall();
+  }
+  else if(x2 + offsetx > 600) {
+    dx = -dx;
+    p1score++;
+    score1.getText().setText(p1score.toString());
+    resetBall();
+  }
+  else if(x2 + offsetx == 15 + 5) {
+    var p1y = player1.getY()
+    if(y2 < p1y + 60 && y2 > p1y) {
+      dx = -dx;
+    }
+  }
+  else if(x2 + offsetx == 580) {
+    var p2y = player2.getY()
+    if(y2 < p2y + 60 && y2 > p2y) {
+      dx = -dx;
+    }
+  }
+
+  if(y2 + offsety < 0) {
+    dy = -dy;
+  }
+  else if(y2 + offsety > 400) {
+    dy = -dy;
+  }
+
+  ball.move(dx, dy);
+}
+
+layer.add(background1).add(background2).add(centerLine).add(player1).add(player2).add(score1).add(score2).add(ball);
+
+stage.add(layer);
+
+var ballUpdater;
+
+function updateBall() {
+  ballUpdater = setTimeout(function(){
+    update(ball);
+    layer.draw();
+    updateBall();
+  }, 10);
+}
+
+function resetBall() {
+  dx = 0;
+  dy = 0;
+  ball.setX(300);
+  ball.setY(200);
+  dx = -1;
+  dy = 1;
+}
+
+updateBall();
