@@ -82,17 +82,13 @@ var ball = new Kinetic.Circle({
 });
 
 background1.on('mousemove', function() {
-  var mousePos = stage.getMousePosition();
-  var x = mousePos.x;
-  var y = mousePos.y;
-  player1.setY(y);
+  player1.setY(stage.getMousePosition().y);
+  layer2.draw();
 });
 
 background2.on('mousemove', function() {
-  var mousePos = stage.getMousePosition();
-  var x = mousePos.x;
-  var y = mousePos.y;
-  player2.setY(y);
+  player2.setY(stage.getMousePosition().y);
+  layer2.draw();
 });
 
 function resetBall() {
@@ -156,13 +152,13 @@ function tick() {
   }
 
   ball.move(dx, dy);
+  layer2.draw();
 }
 
 function updateBall() {
   setTimeout(function(){
     tick();
     updateBall();
-    layer2.draw();
   }, 20);
 }
 
