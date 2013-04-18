@@ -1,7 +1,7 @@
 var p1score = 0; //player 1 score
 var p2score = 0; //player 2 score
-var dx = (Math.random() + 0.7) * (Math.random() > 0.5 ? -1 : 1); // direction of ball's next move
-var dy = (Math.random() + 0.5) * (Math.random() > 0.5 ? -1 : 1); // direction of ball's next move
+var dx = (Math.random() + 1.7) * (Math.random() > 0.5 ? -1 : 1); // direction of ball's next move
+var dy = (Math.random() + 1.5) * (Math.random() > 0.5 ? -1 : 1); // direction of ball's next move
 var offsetx = 0; //offset center x
 var offsety = 0; //offset center y
 var layer1 = new Kinetic.Layer();
@@ -102,8 +102,8 @@ function resetBall() {
   dy = 0;
   ball.setX(300);
   ball.setY(200);
-  dx = (Math.random() + 0.7) * (Math.random() > 0.5 ? -1 : 1); // direction of ball's next move
-  dy = (Math.random() + 0.5) * (Math.random() > 0.5 ? -1 : 1); // direction of ball's next move
+  dx = (Math.random() + 1.7) * (Math.random() > 0.5 ? -1 : 1); // direction of ball's next move
+  dy = (Math.random() + 1.5) * (Math.random() > 0.5 ? -1 : 1); // direction of ball's next move
 }
 
 function tick() {
@@ -165,7 +165,7 @@ function updateBall() {
     tick();
     updateBall();
     layer2.draw();
-  }, 10);
+  }, 20);
 }
 
 layer1.add(background1).add(background2).add(score1).add(score2).add(centerLine);
