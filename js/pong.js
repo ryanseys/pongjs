@@ -118,14 +118,15 @@ function tick() {
   if(dy > 0) offsety = 5;
   else offsety = -5;
 
+  //paddles and back walls
   if(x2 + offsetx < 0) {
-    dx = -dx;
+    //player 2 gets a point!
     p2score++;
     score2.getText().setText(p2score.toString());
     resetBall();
   }
   else if(x2 + offsetx > 600) {
-    dx = -dx;
+    //player 1 gets a point!
     p1score++;
     score1.getText().setText(p1score.toString());
     resetBall();
@@ -143,6 +144,7 @@ function tick() {
     }
   }
 
+  // top and bottom of game walls
   if(y2 + offsety < 0) {
     dy = -dy;
   }
