@@ -86,7 +86,6 @@ background1.on('mousemove', function() {
   var x = mousePos.x;
   var y = mousePos.y;
   player1.setY(y);
-  layer.draw();
 });
 
 background2.on('mousemove', function() {
@@ -94,7 +93,6 @@ background2.on('mousemove', function() {
   var x = mousePos.x;
   var y = mousePos.y;
   player2.setY(y);
-  layer.draw();
 });
 
 function resetBall() {
