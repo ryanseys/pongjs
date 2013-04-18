@@ -8,7 +8,8 @@ var p1score = 0; //player 1 score
 var p2score = 0; //player 2 score
 var dx = (Math.random() + 0.7) * (Math.random() > 0.5 ? -1 : 1); // direction of ball's next move
 var dy = (Math.random() + 0.5) * (Math.random() > 0.5 ? -1 : 1); // direction of ball's next move
-var layer = new Kinetic.Layer();
+var layer1 = new Kinetic.Layer();
+var layer2 = new Kinetic.Layer();
 
 var background1 = new Kinetic.Rect({
   x:0,
@@ -123,12 +124,14 @@ function tick() {
     //player 2 gets a point!
     p2score++;
     score2.getText().setText(p2score.toString());
+    layer1.draw();
     resetBall();
   }
   else if(x2 + offsetx > 600) {
     //player 1 gets a point!
     p1score++;
     score1.getText().setText(p1score.toString());
+    layer1.draw();
     resetBall();
   }
   else if(x2 + offsetx < 20 && x2 + offsetx > 15) {
@@ -159,12 +162,14 @@ function updateBall() {
   setTimeout(function(){
     tick();
     updateBall();
-    layer.draw();
+    layer2.draw();
   }, 10);
 }
 
-layer.add(background1).add(background2).add(centerLine).add(player1).add(player2).add(score1).add(score2).add(ball);
+layer1.add(background1).add(background2).add(score1).add(score2).add(centerLine);
+layer2.add(player1).add(player2).add(ball);
 
-stage.add(layer);
+stage.add(layer1);
+stage.add(layer2);
 
 updateBall();
