@@ -133,12 +133,14 @@ function tick() {
   else if(x2 < 25 && x2 > 20) {
     var p1y = player1.getY();
     if(y2 > p1y - 25 && y2 < p1y + 25) {
+      dy = ((y2 - p1y)/20);
       dx = dx * -1.1;
     }
   }
   else if(x2 < (w - 10) && x2 > (w - 15)) {
     var p2y = player2.getY();
     if(y2 > p2y - 25 && y2 < p2y + 25) {
+      dy = ((y2 - p2y)/10);
       dx = dx * -1.1;
     }
   }
